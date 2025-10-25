@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Teste do Novo Design</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+        
+        .demo-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 2rem;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+        }
+        
+        h1 {
+            text-align: center;
+            color: white;
+            font-size: 2.5rem;
+            margin-bottom: 2rem;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+        }
+        
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+        
+        .feature-card {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 1.5rem;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .feature-card h3 {
+            color: #2d3748;
+            margin-bottom: 1rem;
+            font-size: 1.3rem;
+        }
+        
+        .feature-card p {
+            color: #4a5568;
+            line-height: 1.6;
+        }
+        
+        .demo-links {
+            text-align: center;
+            margin-top: 2rem;
+        }
+        
+        .demo-links a {
+            display: inline-block;
+            margin: 0.5rem;
+            padding: 1rem 2rem;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            text-decoration: none;
+            border-radius: 12px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+        }
+        
+        .demo-links a:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.4);
+        }
+    </style>
+</head>
+<body>
+    <div class="demo-container">
+        <h1>🎨 Novo Design Implementado</h1>
+        
+        <div class="features-grid">
+            <div class="feature-card">
+                <h3>✨ Design Moderno</h3>
+                <p>Gradientes suaves, bordas arredondadas e efeitos de vidro (glassmorphism) para um visual contemporâneo e elegante.</p>
+            </div>
+            
+            <div class="feature-card">
+                <h3>🎯 Animações Suaves</h3>
+                <p>Transições fluidas, efeitos hover interativos e animações de entrada para uma experiência mais dinâmica.</p>
+            </div>
+            
+            <div class="feature-card">
+                <h3>📱 Design Responsivo</h3>
+                <p>Adaptação perfeita para dispositivos móveis, tablets e desktops com breakpoints otimizados.</p>
+            </div>
+            
+            <div class="feature-card">
+                <h3>🎨 Tipografia Melhorada</h3>
+                <p>Fonte Segoe UI, hierarquia visual clara e espaçamento otimizado para melhor legibilidade.</p>
+            </div>
+            
+            <div class="feature-card">
+                <h3>🔧 Feedback Visual</h3>
+                <p>Mensagens de erro e sucesso com animações, estados de loading e feedback imediato para o usuário.</p>
+            </div>
+            
+            <div class="feature-card">
+                <h3>🌈 Paleta de Cores</h3>
+                <p>Gradientes roxo/azul, cores de acessibilidade e contraste otimizado para melhor experiência.</p>
+            </div>
+        </div>
+        
+        <div class="demo-links">
+            <a href="src/pages/login.html">🔐 Testar Login</a>
+            <a href="src/pages/register.html">📝 Testar Cadastro</a>
+            <a href="demo-design.html">👀 Ver Demonstração</a>
+        </div>
+        
+        <div style="text-align: center; margin-top: 2rem; color: rgba(255, 255, 255, 0.8);">
+            <p>✨ Design implementado com sucesso! ✨</p>
+        </div>
+    </div>
+</body>
+</html>

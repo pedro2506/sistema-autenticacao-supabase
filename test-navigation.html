@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Teste de Navegação</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+            background-color: #f0f0f0;
+        }
+        .test-container {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            max-width: 500px;
+            margin: 0 auto;
+        }
+        .test-link {
+            display: inline-block;
+            margin: 10px;
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+        }
+        .test-link:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <div class="test-container">
+        <h1>Teste de Navegação</h1>
+        <p>Clique nos links abaixo para testar a navegação:</p>
+        
+        <a href="src/pages/login.html" class="test-link">Ir para Login</a>
+        <a href="src/pages/register.html" class="test-link">Ir para Cadastro</a>
+        
+        <h2>Instruções para teste:</h2>
+        <ol>
+            <li>Clique em "Ir para Login" - deve abrir a página de login</li>
+            <li>Na página de login, clique em "Cadastre-se" - deve ir para a página de cadastro</li>
+            <li>Na página de cadastro, clique em "Faça login" - deve voltar para a página de login</li>
+            <li>Teste o formulário de cadastro preenchendo os campos</li>
+        </ol>
+        
+        <h2>Para debug:</h2>
+        <p>Abra o console do navegador (F12) para ver as mensagens de debug.</p>
+    </div>
+</body>
+</html>

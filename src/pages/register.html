@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastro - Supabase</title>
+    <link rel="stylesheet" href="../styles/main.css">
+    <!-- Adicione o SDK do Supabase -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+</head>
+<body>
+    <div class="container">
+        <div id="register">
+            <h2>Cadastro</h2>
+            <form id="registerForm">
+                <input type="text" id="registerName" placeholder="Nome" required>
+                <input type="email" id="registerEmail" placeholder="Email" required>
+                <input type="password" id="registerPassword" placeholder="Senha" required>
+                <button type="submit">Cadastrar</button>
+            </form>
+            <div class="toggle">
+                Já tem uma conta? <a href="login.html" id="showLogin">Faça login</a>
+            </div>
+            <div id="registerError" class="error-message"></div>
+            <div id="registerSuccess" class="success-message"></div>
+        </div>
+    </div>
+
+    <script src="../js/auth.js"></script>
+</body>
+</html>

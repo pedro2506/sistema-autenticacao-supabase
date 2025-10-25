@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Demonstração do Novo Design</title>
+    <link rel="stylesheet" href="src/styles/main.css">
+</head>
+<body>
+    <div class="container">
+        <div id="login">
+            <h2>Login</h2>
+            <form id="loginForm">
+                <input type="email" id="loginEmail" placeholder="Email" required>
+                <input type="password" id="loginPassword" placeholder="Senha" required>
+                <button type="submit">Entrar</button>
+            </form>
+            <div class="toggle">
+                Não tem uma conta? <a href="register.html">Cadastre-se</a>
+            </div>
+            <div id="loginError" class="error-message" style="display: none;">
+                Este é um exemplo de mensagem de erro
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Simular interações para demonstração
+        document.addEventListener('DOMContentLoaded', function() {
+            const inputs = document.querySelectorAll('input');
+            const button = document.querySelector('button');
+            const errorDiv = document.getElementById('loginError');
+            
+            // Adicionar efeitos de foco nos inputs
+            inputs.forEach(input => {
+                input.addEventListener('focus', function() {
+                    this.style.transform = 'translateY(-2px)';
+                });
+                
+                input.addEventListener('blur', function() {
+                    this.style.transform = 'translateY(0)';
+                });
+            });
+            
+            // Simular erro ao clicar no botão
+            button.addEventListener('click', function(e) {
+                e.preventDefault();
+                errorDiv.style.display = 'block';
+                setTimeout(() => {
+                    errorDiv.style.display = 'none';
+                }, 3000);
+            });
+        });
+    </script>
+</body>
+</html>

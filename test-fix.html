@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Teste de Correção</title>
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        html, body {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            height: 100%;
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0 !important;
+            color: #333 !important;
+        }
+
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .test-container {
+            background-color: white !important;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            width: 300px;
+            max-width: 100%;
+            min-height: 200px;
+            display: block !important;
+        }
+
+        h1, h2, h3, p, div, span, input, button, a {
+            color: #333 !important;
+            background-color: transparent;
+        }
+
+        .test-link {
+            display: inline-block;
+            margin: 10px;
+            padding: 10px 20px;
+            background-color: #007bff !important;
+            color: white !important;
+            text-decoration: none;
+            border-radius: 5px;
+        }
+
+        .test-link:hover {
+            background-color: #0056b3 !important;
+        }
+
+        .status {
+            padding: 10px;
+            margin: 10px 0;
+            border-radius: 5px;
+            background-color: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+    </style>
+</head>
+<body>
+    <div class="test-container">
+        <h1>Teste de Correção</h1>
+        <div class="status">✅ Página carregada com sucesso!</div>
+        
+        <h2>Teste as páginas:</h2>
+        <a href="src/pages/register-simple.html" class="test-link">Cadastro Simples</a>
+        <a href="src/pages/register.html" class="test-link">Cadastro Completo</a>
+        <a href="src/pages/login.html" class="test-link">Login</a>
+        
+        <h2>Instruções:</h2>
+        <ol>
+            <li>Se você vê esta página com fundo cinza claro, o CSS está funcionando</li>
+            <li>Teste o "Cadastro Simples" primeiro - deve funcionar sem Supabase</li>
+            <li>Se o simples funcionar, teste o "Cadastro Completo"</li>
+            <li>Abra o console (F12) para ver mensagens de debug</li>
+        </ol>
+        
+        <div id="debug-info" style="margin-top: 20px; padding: 10px; background: #f8f9fa; border-radius: 5px;">
+            <h3>Debug Info:</h3>
+            <p id="url-info"></p>
+            <p id="time-info"></p>
+        </div>
+    </div>
+
+    <script>
+        console.log('Página de teste carregada');
+        
+        // Mostrar informações de debug
+        document.getElementById('url-info').textContent = 'URL: ' + window.location.href;
+        document.getElementById('time-info').textContent = 'Carregado em: ' + new Date().toLocaleString();
+        
+        // Verificar se há erros
+        window.addEventListener('error', function(e) {
+            console.error('Erro capturado:', e.error);
+            document.body.innerHTML += '<div style="color: red; padding: 10px;">Erro: ' + e.error.message + '</div>';
+        });
+    </script>
+</body>
+</html>

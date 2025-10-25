@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Editar Perfil - Supabase</title>
+    <link rel="stylesheet" href="../styles/main.css">
+    <style>
+        .profile-container {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+        .profile-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid #ddd;
+        }
+        .back-btn {
+            background-color: #6c757d;
+            color: white;
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+        }
+        .back-btn:hover {
+            background-color: #5a6268;
+        }
+        .profile-form {
+            background-color: white;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        .form-group {
+            margin-bottom: 1rem;
+        }
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: bold;
+            color: #333;
+        }
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 0.75rem;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 1rem;
+        }
+        .form-group textarea {
+            resize: vertical;
+            min-height: 100px;
+        }
+        .btn-primary {
+            background-color: #007bff;
+            color: white;
+            border: none;
+            padding: 0.75rem 1.5rem;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 1rem;
+            margin-right: 1rem;
+        }
+        .btn-primary:hover {
+            background-color: #0056b3;
+        }
+        .btn-secondary {
+            background-color: #6c757d;
+            color: white;
+            border: none;
+            padding: 0.75rem 1.5rem;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 1rem;
+        }
+        .btn-secondary:hover {
+            background-color: #5a6268;
+        }
+        .success-message {
+            background-color: #d4edda;
+            color: #155724;
+            padding: 1rem;
+            border-radius: 4px;
+            margin-bottom: 1rem;
+            display: none;
+        }
+        .error-message {
+            background-color: #f8d7da;
+            color: #721c24;
+            padding: 1rem;
+            border-radius: 4px;
+            margin-bottom: 1rem;
+            display: none;
+        }
+    </style>
+    <!-- Adicione o SDK do Supabase -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+</head>
+<body>
+    <div class="profile-container">
+        <div class="profile-header">
+            <h1>Editar Perfil</h1>
+            <a href="dashboard.html" class="back-btn">Voltar ao Dashboard</a>
+        </div>
+        
+        <div class="success-message" id="successMessage"></div>
+        <div class="error-message" id="errorMessage"></div>
+        
+        <div class="profile-form">
+            <form id="profileForm">
+                <div class="form-group">
+                    <label for="name">Nome:</label>
+                    <input type="text" id="name" name="name" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="email">Email:</label>
+                    <input type="email" id="email" name="email" readonly>
+                </div>
+                
+                <div class="form-group">
+                    <label for="phone">Telefone:</label>
+                    <input type="tel" id="phone" name="phone">
+                </div>
+                
+                <div class="form-group">
+                    <label for="address">Endereço:</label>
+                    <textarea id="address" name="address" placeholder="Digite seu endereço completo"></textarea>
+                </div>
+                
+                <div class="form-actions">
+                    <button type="submit" class="btn-primary">Salvar Alterações</button>
+                    <button type="button" class="btn-secondary" onclick="window.location.href='dashboard.html'">Cancelar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        // Inicializar Supabase na página de perfil
+        const supabaseUrl = 'https://glzrteszukxmbjhkntdx.supabase.co';
+        const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImdsenJ0ZXN6dWt4bWJqaGtudGR4Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjEzODg5OTIsImV4cCI6MjA3Njk2NDk5Mn0.cXmELzI3kc8adQ5hg20C5HJO350bbm4m1PN2-9sTt3E';
+        const supabaseClient = supabase.createClient(supabaseUrl, supabaseKey);
+
+        // Função para buscar perfil do usuário
+        async function getUserProfile(userId) {
+            try {
+                const { data, error } = await supabaseClient
+                    .from('user_profiles')
+                    .select('*')
+                    .eq('id', userId)
+                    .single();
+                
+                if (error) throw error;
+                return data;
+            } catch (error) {
+                console.error('Erro ao buscar perfil:', error.message);
+                return null;
+            }
+        }
+
+        // Função para atualizar perfil do usuário
+        async function updateUserProfile(userId, profileData) {
+            try {
+                const { data, error } = await supabaseClient
+                    .from('user_profiles')
+                    .update({
+                        name: profileData.name,
+                        phone: profileData.phone,
+                        address: profileData.address,
+                        updated_at: new Date().toISOString()
+                    })
+                    .eq('id', userId)
+                    .select();
+                
+                if (error) throw error;
+                return data;
+            } catch (error) {
+                console.error('Erro ao atualizar perfil:', error.message);
+                return null;
+            }
+        }
+
+        // Carregar dados do perfil
+        async function loadProfile() {
+            const { data: { session } } = await supabaseClient.auth.getSession();
+            if (!session) {
+                window.location.href = 'login.html';
+                return;
+            }
+
+            // Preencher email (não editável)
+            document.getElementById('email').value = session.user.email;
+
+            // Carregar perfil do banco de dados
+            const profile = await getUserProfile(session.user.id);
+            if (profile) {
+                document.getElementById('name').value = profile.name || '';
+                document.getElementById('phone').value = profile.phone || '';
+                document.getElementById('address').value = profile.address || '';
+            }
+        }
+
+        // Salvar perfil
+        async function saveProfile(profileData) {
+            const { data: { session } } = await supabaseClient.auth.getSession();
+            if (!session) return;
+
+            const result = await updateUserProfile(session.user.id, profileData);
+            return result;
+        }
+
+        // Event listener para o formulário
+        document.getElementById('profileForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            
+            const formData = {
+                name: document.getElementById('name').value,
+                phone: document.getElementById('phone').value,
+                address: document.getElementById('address').value
+            };
+
+            try {
+                const result = await saveProfile(formData);
+                if (result) {
+                    document.getElementById('successMessage').textContent = 'Perfil atualizado com sucesso!';
+                    document.getElementById('successMessage').style.display = 'block';
+                    document.getElementById('errorMessage').style.display = 'none';
+                    
+                    setTimeout(() => {
+                        window.location.href = 'dashboard.html';
+                    }, 2000);
+                } else {
+                    throw new Error('Erro ao atualizar perfil');
+                }
+            } catch (error) {
+                console.error('Erro ao salvar perfil:', error);
+                document.getElementById('errorMessage').textContent = 'Erro ao salvar perfil: ' + error.message;
+                document.getElementById('errorMessage').style.display = 'block';
+                document.getElementById('successMessage').style.display = 'none';
+            }
+        });
+
+        // Carregar perfil ao inicializar a página
+        loadProfile();
+    </script>
+</body>
+</html>

@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Teste de Autenticação</title>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+</head>
+<body>
+    <h1>Teste de Autenticação Supabase</h1>
+    
+    <div id="status">Verificando conexão...</div>
+    
+    <form id="testForm">
+        <h2>Teste de Login</h2>
+        <input type="email" id="email" placeholder="Email" value="teste@exemplo.com" required>
+        <input type="password" id="password" placeholder="Senha" value="123456" required>
+        <button type="submit">Testar Login</button>
+    </form>
+    
+    <form id="registerForm">
+        <h2>Teste de Cadastro</h2>
+        <input type="text" id="regName" placeholder="Nome" value="Usuário Teste" required>
+        <input type="email" id="regEmail" placeholder="Email" value="novo@exemplo.com" required>
+        <input type="password" id="regPassword" placeholder="Senha" value="123456" required>
+        <button type="submit">Testar Cadastro</button>
+    </form>
+    
+    <div id="result"></div>
+    
+    <script>
+        // Configuração do Supabase
+        const supabaseUrl = 'https://glzrteszukxmbjhkntdx.supabase.co';
+        const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImdsenJ0ZXN6dWt4bWJqaGtudGR4Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjEzODg5OTIsImV4cCI6MjA3Njk2NDk5Mn0.cXmELzI3kc8adQ5hg20C5HJO350bbm4m1PN2-9sTt3E';
+        const supabaseClient = supabase.createClient(supabaseUrl, supabaseKey);
+        
+        // Verificar status da conexão
+        async function checkConnection() {
+            try {
+                const { data, error } = await supabaseClient.auth.getSession();
+                if (error) {
+                    document.getElementById('status').innerHTML = '❌ Erro de conexão: ' + error.message;
+                } else {
+                    document.getElementById('status').innerHTML = '✅ Conexão estabelecida com sucesso';
+                }
+            } catch (err) {
+                document.getElementById('status').innerHTML = '❌ Erro: ' + err.message;
+            }
+        }
+        
+        // Teste de login
+        document.getElementById('testForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+            
+            document.getElementById('result').innerHTML = 'Testando login...';
+            
+            try {
+                const { data, error } = await supabaseClient.auth.signInWithPassword({
+                    email: email,
+                    password: password
+                });
+                
+                if (error) {
+                    document.getElementById('result').innerHTML = `
+                        <div style="color: red;">
+                            <h3>❌ Erro no Login</h3>
+                            <p><strong>Mensagem:</strong> ${error.message}</p>
+                            <p><strong>Status:</strong> ${error.status}</p>
+                            <p><strong>Tipo:</strong> ${typeof error}</p>
+                            <pre>${JSON.stringify(error, null, 2)}</pre>
+                        </div>
+                    `;
+                } else {
+                    document.getElementById('result').innerHTML = `
+                        <div style="color: green;">
+                            <h3>✅ Login Bem-sucedido</h3>
+                            <p><strong>Email:</strong> ${data.user.email}</p>
+                            <p><strong>ID:</strong> ${data.user.id}</p>
+                            <p><strong>Nome:</strong> ${data.user.user_metadata?.name || 'Não informado'}</p>
+                        </div>
+                    `;
+                }
+            } catch (err) {
+                document.getElementById('result').innerHTML = `
+                    <div style="color: red;">
+                        <h3>❌ Erro de Exceção</h3>
+                        <p><strong>Mensagem:</strong> ${err.message}</p>
+                        <pre>${JSON.stringify(err, null, 2)}</pre>
+                    </div>
+                `;
+            }
+        });
+        
+        // Teste de cadastro
+        document.getElementById('registerForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            
+            const name = document.getElementById('regName').value;
+            const email = document.getElementById('regEmail').value;
+            const password = document.getElementById('regPassword').value;
+            
+            document.getElementById('result').innerHTML = 'Testando cadastro...';
+            
+            try {
+                const { data, error } = await supabaseClient.auth.signUp({
+                    email: email,
+                    password: password,
+                    options: {
+                        data: {
+                            name: name
+                        }
+                    }
+                });
+                
+                if (error) {
+                    document.getElementById('result').innerHTML = `
+                        <div style="color: red;">
+                            <h3>❌ Erro no Cadastro</h3>
+                            <p><strong>Mensagem:</strong> ${error.message}</p>
+                            <p><strong>Status:</strong> ${error.status}</p>
+                            <pre>${JSON.stringify(error, null, 2)}</pre>
+                        </div>
+                    `;
+                } else {
+                    document.getElementById('result').innerHTML = `
+                        <div style="color: green;">
+                            <h3>✅ Cadastro Bem-sucedido</h3>
+                            <p><strong>Email:</strong> ${data.user.email}</p>
+                            <p><strong>ID:</strong> ${data.user.id}</p>
+                            <p><strong>Nome:</strong> ${data.user.user_metadata?.name || 'Não informado'}</p>
+                            <p><strong>Confirmação necessária:</strong> ${data.user.email_confirmed_at ? 'Não' : 'Sim'}</p>
+                        </div>
+                    `;
+                }
+            } catch (err) {
+                document.getElementById('result').innerHTML = `
+                    <div style="color: red;">
+                        <h3>❌ Erro de Exceção no Cadastro</h3>
+                        <p><strong>Mensagem:</strong> ${err.message}</p>
+                        <pre>${JSON.stringify(err, null, 2)}</pre>
+                    </div>
+                `;
+            }
+        });
+        
+        // Verificar conexão ao carregar
+        checkConnection();
+    </script>
+</body>
+</html>

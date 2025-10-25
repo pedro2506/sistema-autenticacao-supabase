@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - Supabase</title>
+    <link rel="stylesheet" href="../styles/main.css">
+    <!-- Adicione o SDK do Supabase -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+</head>
+<body>
+    <div class="container">
+        <div id="login">
+            <h2>Login</h2>
+            <form id="loginForm">
+                <input type="email" id="loginEmail" placeholder="Email" required>
+                <input type="password" id="loginPassword" placeholder="Senha" required>
+                <button type="submit">Entrar</button>
+            </form>
+            <div class="toggle">
+                Não tem uma conta? <a href="register.html" id="showRegister">Cadastre-se</a>
+            </div>
+            <div id="loginError" class="error-message"></div>
+        </div>
+
+        <div id="welcome" style="display: none;">
+            <h2>Bem-vindo!</h2>
+            <p id="welcomeMessage"></p>
+            <button id="logout">Sair</button>
+        </div>
+    </div>
+
+    <script src="../js/auth.js"></script>
+</body>
+</html>

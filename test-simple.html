@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Teste Simples</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            background-color: #f0f0f0;
+        }
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        .status {
+            padding: 10px;
+            margin: 10px 0;
+            border-radius: 5px;
+        }
+        .success {
+            background-color: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+        .error {
+            background-color: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+        .info {
+            background-color: #d1ecf1;
+            color: #0c5460;
+            border: 1px solid #bee5eb;
+        }
+    </style>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+</head>
+<body>
+    <div class="container">
+        <h1>🧪 Teste de Conectividade</h1>
+        
+        <div id="status" class="status info">
+            Verificando conexão com Supabase...
+        </div>
+        
+        <div id="test-results"></div>
+        
+        <button onclick="testConnection()" style="padding: 10px 20px; margin: 10px 0; background: #007bff; color: white; border: none; border-radius: 5px; cursor: pointer;">
+            Testar Conexão
+        </button>
+        
+        <button onclick="testLogin()" style="padding: 10px 20px; margin: 10px 0; background: #28a745; color: white; border: none; border-radius: 5px; cursor: pointer;">
+            Testar Login
+        </button>
+    </div>
+
+    <script>
+        // Configuração do Supabase
+        const supabaseUrl = 'https://glzrteszukxmbjhkntdx.supabase.co';
+        const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImdsenJ0ZXN6dWt4bWJqaGtudGR4Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjEzODg5OTIsImV4cCI6MjA3Njk2NDk5Mn0.cXmELzI3kc8adQ5hg20C5HJO350bbm4m1PN2-9sTt3E';
+        const supabaseClient = supabase.createClient(supabaseUrl, supabaseKey);
+        
+        function updateStatus(message, type = 'info') {
+            const status = document.getElementById('status');
+            status.textContent = message;
+            status.className = `status ${type}`;
+        }
+        
+        function addResult(message, type = 'info') {
+            const results = document.getElementById('test-results');
+            const div = document.createElement('div');
+            div.className = `status ${type}`;
+            div.textContent = message;
+            results.appendChild(div);
+        }
+        
+        async function testConnection() {
+            updateStatus('Testando conexão...', 'info');
+            
+            try {
+                const { data, error } = await supabaseClient.auth.getSession();
+                
+                if (error) {
+                    updateStatus('❌ Erro de conexão: ' + error.message, 'error');
+                    addResult('Erro: ' + JSON.stringify(error, null, 2), 'error');
+                } else {
+                    updateStatus('✅ Conexão estabelecida com sucesso!', 'success');
+                    addResult('Sessão atual: ' + (data.session ? 'Usuário logado' : 'Nenhum usuário logado'), 'info');
+                }
+            } catch (err) {
+                updateStatus('❌ Erro de exceção: ' + err.message, 'error');
+                addResult('Exceção: ' + JSON.stringify(err, null, 2), 'error');
+            }
+        }
+        
+        async function testLogin() {
+            addResult('Testando login com credenciais: teste@exemplo.com / 123456', 'info');
+            
+            try {
+                const { data, error } = await supabaseClient.auth.signInWithPassword({
+                    email: 'teste@exemplo.com',
+                    password: '123456'
+                });
+                
+                if (error) {
+                    addResult('❌ Erro no login: ' + error.message, 'error');
+                } else {
+                    addResult('✅ Login bem-sucedido!', 'success');
+                    addResult('Usuário: ' + data.user.email, 'info');
+                    addResult('ID: ' + data.user.id, 'info');
+                }
+            } catch (err) {
+                addResult('❌ Erro de exceção no login: ' + err.message, 'error');
+            }
+        }
+        
+        // Testar conexão automaticamente ao carregar
+        window.addEventListener('load', () => {
+            testConnection();
+        });
+    </script>
+</body>
+</html>
