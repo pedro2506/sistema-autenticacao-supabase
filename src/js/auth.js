@@ -24,6 +24,7 @@ document.addEventListener('DOMContentLoaded', function() {
 let supabaseClient;
 try {
     const supabaseUrl = 'https://glzrteszukxmbjhkntdx.supabase.co';
+    const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImdsenJ0ZXN6dWt4bWJqaGtudGR4Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjEzODg5OTIsImV4cCI6MjA3Njk2NDk5Mn0.cXmELzI3kc8adQ5hg20C5HJO350bbm4m1PN2-9sTt3E';
     supabaseClient = supabase.createClient(supabaseUrl, supabaseKey);
     console.log('Cliente Supabase inicializado com sucesso');
 } catch (error) {
