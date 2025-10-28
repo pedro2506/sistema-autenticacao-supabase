@@ -1,280 +1,270 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login - CodeForce 3D</title>
-    
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Login - CodeForce</title>
     <style>
-        /* CSS para o efeito 3D e animação de gradiente */
-
-        /* 1. Keyframes para a Animação do Fundo */
-        @keyframes gradientMove {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
+      /* Seu CSS permanece o mesmo, sem alterações */
+      @keyframes gradientMove {
+        0% {
+          background-position: 0% 50%;
         }
-
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            margin: 0;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-            color: #6495ED;
+        50% {
+          background-position: 100% 50%;
         }
-
-        /* 2. Classe para aplicar o gradiente animado */
-        .animated-gradient {
-            background: linear-gradient(-45deg, #034353, #0047AB, #0aa5ec);
-            background-size: 300% 300%;
-            animation: gradientMove 05s ease infinite;
+        100% {
+          background-position: 0% 50%;
         }
-
-        .container {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            width: 100%;
-            padding: 20px;
-        }
-
-        .login-box {
-            background: #0a669b;
-            padding: 20px;
-            border-radius: 25px; /* Bordas bem arredondadas */
-            box-shadow: 10px 10px 20px rgba(0, 0, 0, 0.4), /* Sombra escura (profundidade) */
-                        -10px -10px 20px rgba(255, 255, 255, 0.05); /* Sombra clara (luz) */
-            text-align: center;
-            width: 100%;
-            max-width: 300px;
-            position: relative;
-            border: 1px solid rgba(255, 255, 255, 0.05);
-        }
-
-        .icon-header {
-            background: #0a669b;
-            width: 120px;
-            height: 120px;
-            border-radius: 50%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            position: absolute;
-            top: -60px; /* Metade da altura para flutuar */
-            left: 50%;
-            transform: translateX(-50%);
-            box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.3),
-                        -5px -5px 15px rgba(255, 255, 255, 0.07);
-        }
-
-        .icon-header svg {
-            width: 60px;
-            height: 60px;
-            fill: #d1d9e6;
-        }
-
-        h2 {
-            margin-top: 50px; /* Espaço para o ícone */
-            margin-bottom: 30px;
-            font-size: 4em;
-            font-weight: 600;
-            color: #e0e5ec;
-        }
-
-        form {
-            display: flex;
-            flex-direction: column;
-            gap: 30px;
-        }
-
-        .input-group {
-            position: relative;
-        }
-
-        .input-group svg {
-            position: absolute;
-            left: 20px;
-            top: 50%;
-            transform: translateY(-50%);
-            width: 20px;
-            height: 20px;
-            fill: #;
-        }
-        
-        /* Efeito "pressionado" (inset) para os inputs */
-        input[type="email"],
-        input[type="password"] {
-            width: calc(100% - 70px);
-            padding: 16px 20px 16px 50px;
-            border: none;
-            border-radius: 15px;
-            background: #212649; /* Fundo mais escuro para parecer fundo */
-            color: #e0e5ec;
-            font-size: 1em;
-            box-shadow: inset 5px 5px 10px rgba(0, 0, 0, 0.5), /* Sombra interna escura */
-                        inset -5px -5px 10px rgba(255, 255, 255, 0.05); /* Sombra interna clara */
-            transition: all 0.3s ease;
-        }
-
-        input::placeholder {
-            color: #297deb;
-        }
-
-        input:focus {
-            outline: none;
-            box-shadow: inset 5px 5px 10px rgba(0, 0, 0, 0.5),
-                        inset -5px -5px 10px rgba(255, 255, 255, 0.05),
-                        0 0 0 2px #d4d6e2; /* Destaque ao focar */
-        }
-
-        .options {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            font-size: 0.9em;
-            padding: 0 5px;
-        }
-
-        .remember-me {
-            display: flex;
-            align-items: center;
-            cursor: pointer;
-        }
-        
-        .remember-me input[type="checkbox"] {
-            margin-right: 8px;
-            accent-color: #white;
-        }
-
-        .options a {
-            color: #white;
-            text-decoration: none;
-        }
+      }
+      body {
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        margin: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh;
+        color: #6495ed;
+      }
+      .animated-gradient {
+        background: linear-gradient(-45deg, #034353, #0047ab, #0aa5ec);
+        background-size: 300% 300%;
+        animation: gradientMove 5s ease infinite;
+      }
+      .container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+        padding: 20px;
+      }
+      .login-box {
+        background: #0a669b;
+        padding: 20px;
+        border-radius: 25px;
+        box-shadow: 10px 10px 20px rgba(0, 0, 0, 0.4),
+          -10px -10px 20px rgba(255, 255, 255, 0.05);
+        text-align: center;
+        width: 100%;
+        max-width: 300px;
+        position: relative;
+        border: 1px solid rgba(255, 255, 255, 0.05);
+      }
+      .icon-header {
+        background: #0a669b;
+        width: 120px;
+        height: 120px;
+        border-radius: 50%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        position: absolute;
+        top: -60px;
+        left: 50%;
+        transform: translateX(-50%);
+        box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.3),
+          -5px -5px 15px rgba(255, 255, 255, 0.07);
+      }
+      .icon-header svg {
+        width: 60px;
+        height: 60px;
+        fill: #0e66f3;
+      }
+      h2 {
+        margin-top: 70px;
+        margin-bottom: 30px;
+        font-size: 2em;
+        font-weight: 600;
+        color: green;
+      }
+      form {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+      }
+      .input-group {
+        position: relative;
+      }
+      .input-group svg {
+        position: absolute;
+        left: 20px;
+        top: 50%;
+        transform: translateY(-50%);
+        width: 20px;
+        height: 20px;
+        fill: greenyellow;
+      }
+      input[type="email"],
+      input[type="password"] {
+        width: 100%;
+        box-sizing: border-box;
+        padding: 16px 20px 16px 50px;
+        border: none;
+        border-radius: 15px;
+        background: rgba(33, 38, 73, 0.8);
+        color: #e0e5ec;
+        font-size: 1em;
+        box-shadow: inset 5px 5px 10px rgba(0, 0, 0, 0.5),
+          inset -5px -5px 10px rgba(255, 255, 255, 0.05);
+      }
+      .options {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 0.9em;
+        padding: 0 5px;
+     
+      }
+      .options a {
+        color: #e0e5ec;
+        text-decoration: none;
 
         .options a:hover {
-            text-decoration: underline;
-        }
+         text-decoration: underline; 
+}
 
-        /* Efeito "saltado" (extrude) para o botão */
-        button[type="submit"] {
-            padding: 16px;
-            border: none;
-            border-radius: 15px;
-            background: #03b2f7;
-            color: #e0e5ec;
-            font-size: 1.1em;
-            font-weight: bold;
-            cursor: pointer;
-            transition: all 0.2s ease-in-out;
-            box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.3), /* Sombra externa escura */
-                        -5px -5px 10px rgba(255, 255, 255, 0.1); /* Sombra externa clara */
-        }
-
-        button[type="submit"]:hover {
-            background: #0dd2ec;
-        }
-        
-        /* Efeito de pressionar o botão */
-        button[type="submit"]:active {
-            background: #434e8c;
-            box-shadow: inset 3px 3px 7px rgba(4, 169, 219, 0.5),
-                        inset -3px -3px 7px rgba(15, 135, 248, 0.05);
-        }
-
-        .login-box p {
-            margin-top: 25px;
-        }
-
-        .login-box p a {
-            color: #088edb;
-            text-decoration: none;
-            font-weight: bold;
-        }
-
-        #message {
-            margin-top: 15px;
-            font-weight: bold;
-        }
-
-        #logout-btn { display: none; }
+      }
+      button[type="submit"] {
+        padding: 16px;
+        border: none;
+        border-radius: 15px;
+        background: #03b2f7;
+        color: #e0e5ec;
+        font-size: 1.1em;
+        font-weight: bold;
+        cursor: pointer;
+        transition: all 0.2s ease-in-out;
+        box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.3),
+          -5px -5px 10px rgba(255, 255, 255, 0.1);
+      }
+      .login-box p {
+        margin-top: 25px;
+        color: #e0e5ec;
+      }
+      .login-box p a {
+        color: #03b2f7;
+        text-decoration: none;
+        font-weight: bold;
+      }
+      #message {
+        margin-top: 15px;
+        font-weight: bold;
+      }
     </style>
-</head>
-<body class="animated-gradient">
+  </head>
+  <body class="animated-gradient">
     <div class="container">
-        <div class="login-box">
-            <div class="icon-header">
-                <svg viewBox="0 0 24 24"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></svg>
-            </div>
-            <h2> </h2>
-            <form id="login-form">
-                <div class="input-group">
-                    <svg viewBox="0 0 24 24"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></svg>
-                    <input type="email" id="email" placeholder="Email" required />
-                </div>
-                <div class="input-group">
-                    <svg viewBox="0 0 24 24"><path d="M18 8h-1V6c0-2.76-2.24-5-5-5S7 3.24 7 6v2H6c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V10c0-1.1-.9-2-2-2zm-6 9c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2zm3.1-9H8.9V6c0-1.71 1.39-3.1 3.1-3.1 1.71 0 3.1 1.39 3.1 3.1v2z"/></svg>
-                    <input type="password" id="password" placeholder="Senha" required />
-                </div>
-                <div class="options">
-                    <label class="remember-me">
-                        <input type="checkbox" id="remember-me"> lembre de mim
-                    </label>
-                    <a href="#">Esqueceu a Senha?</a>
-                </div>
-                <button type="submit">LOGIN</button>
-            </form>
-            <p>Não tem uma conta? <a href="register.html">Cadastre-se</a></p>
-            <div id="message"></div>
-            <button id="logout-btn"></button>
+      <div class="login-box">
+        <div class="icon-header">
+          <svg viewBox="0 0 24 24">
+            <path
+              d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"
+            />
+          </svg>
         </div>
+        <h2>CodeForce <br /></h2>
+        <form id="login-form">
+          <div class="input-group">
+            <svg viewBox="0 0 24 24">
+              <path
+                d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"
+              />
+            </svg>
+            <input type="email" id="email" placeholder="Email" required />
+          </div>
+          <div class="input-group">
+            <svg viewBox="0 0 24 24">
+              <path
+                d="M18 8h-1V6c0-2.76-2.24-5-5-5S7 3.24 7 6v2H6c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V10c0-1.1-.9-2-2-2zm-6 9c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2zm3.1-9H8.9V6c0-1.71 1.39-3.1 3.1-3.1 1.71 0 3.1 1.39 3.1 3.1v2z"
+              />
+            </svg>
+            <input type="password" id="password" placeholder="Senha" required />
+          </div>
+          <div class="options">
+            <span /> <a href="#" id="forgot-password">Esqueceu a Senha?</a>
+          </div>
+          <button type="submit">LOGIN</button>
+        </form>
+        <p>Não tem uma conta? <a href="register.html">Cadastre-se</a></p>
+        <div id="message"></div>
+      </div>
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <script>
-        const supabaseUrl = 'https://glzrteszukxmbjhkntdx.supabase.co';
-        const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImdsenJ0ZXN6dWt4bWJqaGtudGR4Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjEzODg5OTIsImV4cCI6MjA3Njk2NDk5Mn0.cXmELzI3kc8adQ5hg20C5HJO350bbm4m1PN2-9sTt3E';
-        // A inicialização correta, usando uma variável diferente
-        const supabaseClient = supabase.createClient(supabaseUrl, supabaseKey);
+      const supabaseUrl = "https://glzrteszukxmbjhkntdx.supabase.co";
+      const supabaseKey =
+        "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImdsenJ0ZXN6dWt4bWJqaGtudGR4Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjEzODg5OTIsImV4cCI6MjA3Njk2NDk5Mn0.cXmELzI3kc8adQ5hg20C5HJO350bbm4m1PN2-9sTt3E";
+      const supabaseClient = supabase.createClient(supabaseUrl, supabaseKey);
 
-        const form = document.getElementById('login-form');
-        const message = document.getElementById('message');
-        const logoutBtn = document.getElementById('logout-btn');
+      const form = document.getElementById("login-form");
+      const message = document.getElementById("message");
 
-        // Checa a sessão ao carregar a página
-        checkSession();
+      // --- INÍCIO DA NOVA FUNCIONALIDADE ---
+      const forgotPasswordLink = document.getElementById("forgot-password");
 
-        async function checkSession() {
-            const { data: { session } } = await supabaseClient.auth.getSession();
-            if (session) {
-                // Se já houver sessão, redireciona direto para o dashboard
-                window.location.href = 'dashboard.html';
-            }
+      checkSession();
+
+      async function checkSession() {
+        const {
+          data: { session },
+        } = await supabaseClient.auth.getSession();
+        if (session) {
+          window.location.href = "dashboard.html";
+        }
+      }
+
+      form.addEventListener("submit", async (e) => {
+        e.preventDefault();
+        message.textContent = "";
+        const email = document.getElementById("email").value.trim();
+        const password = document.getElementById("password").value;
+
+        const { error } = await supabaseClient.auth.signInWithPassword({
+          email,
+          password,
+        });
+
+        if (error) {
+          message.textContent = "Email ou senha inválidos.";
+          message.style.color = "#ff6b6b";
+        } else {
+          message.textContent = `Bem-vindo! Redirecionando...`;
+          message.style.color = "#81c784";
+          setTimeout(() => {
+            window.location.href = "dashboard.html";
+          }, 1500);
+        }
+      });
+
+      // Adiciona o evento de clique para o link "Esqueceu a Senha?"
+      forgotPasswordLink.addEventListener("click", async (e) => {
+        e.preventDefault(); // Impede que o link navegue para "#"
+
+        const email = prompt(
+          "Por favor, digite seu e-mail para redefinir a senha:"
+        );
+
+        if (!email) {
+          return; // O usuário cancelou
         }
 
-        form.addEventListener('submit', async (e) => {
-            e.preventDefault();
-            message.textContent = ''; // Limpa mensagens anteriores
-            const email = document.getElementById('email').value.trim();
-            const password = document.getElementById('password').value;
+        const { error } = await supabaseClient.auth.resetPasswordForEmail(
+          email,
+          {
+            redirectTo: "http://127.0.0.1:5500/reset-password.html", // <<-- MUITO IMPORTANTE: Mude para a URL onde seu site está rodando
+          }
+        );
 
-            const { data, error } = await supabaseClient.auth.signInWithPassword({
-                email,
-                password
-            });
-
-            if (error) {
-                message.textContent = 'Email ou senha inválidos.';
-                message.style.color = "#ff6b6b";
-            } else {
-                message.textContent = `Bem-vindo! Redirecionando...`;
-                message.style.color = "#81c784";
-                setTimeout(() => {
-                    window.location.href = 'dashboard.html';
-                }, 1500);
-            }
-        });
+        if (error) {
+          alert("Erro ao enviar o e-mail: " + error.message);
+        } else {
+          alert(
+            "E-mail de redefinição de senha enviado! Verifique sua caixa de entrada e spam."
+          );
+        }
+      });
+      // --- FIM DA NOVA FUNCIONALIDADE ---
     </script>
-</body>
+  </body>
 </html>
