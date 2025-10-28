@@ -203,17 +203,6 @@
       // --- INÍCIO DA NOVA FUNCIONALIDADE ---
       const forgotPasswordLink = document.getElementById("forgot-password");
 
-      checkSession();
-
-      async function checkSession() {
-        const {
-          data: { session },
-        } = await supabaseClient.auth.getSession();
-        if (session) {
-          window.location.href = "dashboard.html";
-        }
-      }
-
       form.addEventListener("submit", async (e) => {
         e.preventDefault();
         message.textContent = "";
@@ -252,7 +241,7 @@
         const { error } = await supabaseClient.auth.resetPasswordForEmail(
           email,
           {
-            redirectTo: "http://127.0.0.1:5500/reset-password.html", // <<-- MUITO IMPORTANTE: Mude para a URL onde seu site está rodando
+            redirectTo: "http://127.0.0.1:5500/reset-password.html"
           }
         );
 
