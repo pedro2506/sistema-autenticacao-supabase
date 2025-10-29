@@ -109,6 +109,18 @@
             filter: drop-shadow(0 2px 4px rgba(0,0,0,0.3));
             margin-bottom: 5px;
         }
+        .logo-img {
+            width: 140px;
+            height: auto;
+            object-fit: contain;
+            display: block;
+            margin: 0 auto 6px;
+            filter: drop-shadow(0 6px 14px rgba(0,0,0,0.45));
+        }
+        @media (max-width: 480px) {
+            .logo-img { width: 110px; }
+            .logo-circle { width: 100px; height: 100px; }
+        }
         
         .logo-text {
             color: white;
@@ -297,9 +309,8 @@
         <div class="header-section">
             <div class="logo-wrapper">
                 <div class="logo-circle">
-                    <svg viewBox="0 0 24 24">
-                        <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
-                    </svg>
+                    <!-- substituído SVG pelo logo fornecido (coloque em src/assets/codeforge-logo.png) -->
+                    <img src="../assets/codeforge-logo.png" alt="CodeForce" class="logo-img">
                     <div class="logo-text">CodeForce</div>
                 </div>
             </div>
@@ -380,5 +391,45 @@
 
         loadProfile();
     </script>
+        <script>
+            (function(){
+                const tries = ['../assets/codeforge-logo.png','assets/codeforge-logo.png','/src/assets/codeforge-logo.png','/assets/codeforge-logo.png'];
+                function makeTextSVG(width){
+                    const ns = 'http://www.w3.org/2000/svg';
+                    const svg = document.createElementNS(ns,'svg');
+                    svg.setAttribute('viewBox','0 0 360 80');
+                    svg.setAttribute('width', width || 140);
+                    svg.setAttribute('height', 'auto');
+                    const text = document.createElementNS(ns,'text');
+                    text.setAttribute('x','50%');
+                    text.setAttribute('y','55%');
+                    text.setAttribute('dominant-baseline','middle');
+                    text.setAttribute('text-anchor','middle');
+                    text.setAttribute('font-family','Segoe UI, Tahoma, Arial, sans-serif');
+                    text.setAttribute('font-size','28');
+                    text.setAttribute('fill','#ffffff');
+                    text.textContent = 'CodeForce';
+                    svg.appendChild(text);
+                    return svg;
+                }
+
+                function attachFallback(img){
+                    if(!img) return;
+                    let i = 0;
+                    img.addEventListener('error', function onerr(){
+                        if(i < tries.length){
+                            img.src = tries[i++];
+                        } else {
+                            const svg = makeTextSVG(parseInt(getComputedStyle(img).width) || 120);
+                            img.replaceWith(svg);
+                        }
+                    });
+                }
+
+                document.addEventListener('DOMContentLoaded', ()=>{
+                    document.querySelectorAll('.logo-img').forEach(attachFallback);
+                });
+            })();
+        </script>
 </body>
 </html>

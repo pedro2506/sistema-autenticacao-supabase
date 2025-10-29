@@ -47,6 +47,13 @@
         .icon-header svg {
             width: 50px; height: 50px; fill: #0e66f3;
         }
+        .header-logo {
+            width: 64px; height: 64px; object-fit: contain; display: block;
+        }
+        @media (max-width: 480px) {
+            .header-logo { width: 90px; }
+            #avatarPreview { width: 120px !important; }
+        }
         h2 {
             margin-top: 60px;
             text-align: center; margin-bottom: 20px;
@@ -82,7 +89,8 @@
     <div class="container">
         <div class="content-box">
             <div class="icon-header">
-                <svg viewBox="0 0 24 24"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></svg>
+                <!-- substituído SVG por imagem enviada; coloque em src/assets/codeforge-logo.png -->
+                <img src="../assets/codeforge-logo.png" alt="CodeForce" class="header-logo">
             </div>
             
             <h2>Editar Perfil</h2>
@@ -104,7 +112,7 @@
                 
                 <label>Foto do Perfil</label>
                 <div style="text-align: center; margin-top: 10px;">
-                     <img id="avatarPreview" src="assets/avatar-icon.png" alt="Pré-visualização da Foto" style="width: 120px; height: 120px; border-radius: 50%; object-fit: cover; margin-bottom: 15px;">
+                     <img id="avatarPreview" src="../assets/codeforge-logo.png" alt="Pré-visualização da Foto" style="width: 160px; height: auto; border-radius: 0; object-fit: contain; margin-bottom: 15px;">
                 </div>
                 <label for="avatar" class="file-label">Escolher Nova Foto</label>
                 <input type="file" id="avatar" accept="image/*" style="display: none;">
@@ -196,5 +204,45 @@
             }
         });
     </script>
+        <script>
+            (function(){
+                const tries = ['../assets/codeforge-logo.png','assets/codeforge-logo.png','/src/assets/codeforge-logo.png','/assets/codeforge-logo.png'];
+                function makeTextSVG(width){
+                    const ns = 'http://www.w3.org/2000/svg';
+                    const svg = document.createElementNS(ns,'svg');
+                    svg.setAttribute('viewBox','0 0 360 80');
+                    svg.setAttribute('width', width || 140);
+                    svg.setAttribute('height', 'auto');
+                    const text = document.createElementNS(ns,'text');
+                    text.setAttribute('x','50%');
+                    text.setAttribute('y','55%');
+                    text.setAttribute('dominant-baseline','middle');
+                    text.setAttribute('text-anchor','middle');
+                    text.setAttribute('font-family','Segoe UI, Tahoma, Arial, sans-serif');
+                    text.setAttribute('font-size','28');
+                    text.setAttribute('fill','#ffffff');
+                    text.textContent = 'CodeForce';
+                    svg.appendChild(text);
+                    return svg;
+                }
+
+                function attachFallback(img){
+                    if(!img) return;
+                    let i = 0;
+                    img.addEventListener('error', function onerr(){
+                        if(i < tries.length){
+                            img.src = tries[i++];
+                        } else {
+                            const svg = makeTextSVG(parseInt(getComputedStyle(img).width) || 120);
+                            img.replaceWith(svg);
+                        }
+                    });
+                }
+
+                document.addEventListener('DOMContentLoaded', ()=>{
+                    document.querySelectorAll('.header-logo, #avatarPreview').forEach(attachFallback);
+                });
+            })();
+        </script>
 </body>
 </html>
