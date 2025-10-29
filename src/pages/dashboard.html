@@ -74,8 +74,8 @@
         .logo-circle {
             width: 120px;
             height: 120px;
-            /* usar o tom principal do login para o ícone flutuante */
-            background: linear-gradient(135deg, #0a669b 0%, #0f7f99 100%);
+            /* preencher o círculo com a logo (coloque em src/assets/codeforge-logo.png) */
+            background: linear-gradient(135deg, #0a669b 0%, #0f7f99 100%), url('../assets/codeforge-logo.png') no-repeat center/cover;
             border-radius: 50%;
             display: flex;
             flex-direction: column;
@@ -102,20 +102,11 @@
             filter: blur(12px);
         }
         
-        .logo-circle svg {
-            width: 40px;
-            height: 40px;
-            fill: white;
-            filter: drop-shadow(0 2px 4px rgba(0,0,0,0.3));
-            margin-bottom: 5px;
-        }
+        /* esconder elemento img/svg interno para que o background do círculo apareça limpo */
+        .logo-circle svg,
+        .logo-circle img,
         .logo-img {
-            width: 140px;
-            height: auto;
-            object-fit: contain;
-            display: block;
-            margin: 0 auto 6px;
-            filter: drop-shadow(0 6px 14px rgba(0,0,0,0.45));
+            display: none !important;
         }
         @media (max-width: 480px) {
             .logo-img { width: 110px; }

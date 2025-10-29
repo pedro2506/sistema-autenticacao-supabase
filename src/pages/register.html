@@ -36,13 +36,14 @@
             animation: gradientMove 5s ease infinite;
         }
         .icon-header {
-            background: rgba(10, 102, 155, 0.8); /* Fundo com transparência para combinar com gradiente */
+            /* preencher o círculo com a logo (coloque em src/assets/codeforge-logo.png) */
+            background: rgba(10, 102, 155, 0.8) url('../assets/codeforge-logo.png') no-repeat center/cover;
             width: 120px; height: 120px; border-radius: 50%; display: flex;
             justify-content: center; align-items: center; position: absolute;
             top: -60px; left: 50%; transform: translateX(-50%);
             box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.3), -5px -5px 15px rgba(255, 255, 255, 0.07);
         }
-        .icon-header svg { width: 60px; height: 60px; fill: #d1d9e6; }
+        .icon-header svg { display: none !important; }
         h2 { margin-top: 70px; margin-bottom: 30px; font-size: 2.5em; font-weight: 600; color: #e0e5ec; }
         form { display: flex; flex-direction: column; gap: 20px; }
         input {
