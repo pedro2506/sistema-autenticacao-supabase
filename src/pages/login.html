@@ -42,13 +42,17 @@
         background: #0a669b;
         padding: 20px;
         border-radius: 25px;
-        box-shadow: 10px 10px 20px rgba(0, 0, 0, 0.4),
-          -10px -10px 20px rgba(255, 255, 255, 0.05);
+        /* sombras em camadas para profundidade realista */
+        box-shadow:
+          0 26px 50px rgba(1, 12, 30, 0.55),   /* sombra difusa principal por baixo */
+          0 8px 22px rgba(2, 8, 20, 0.32),     /* camada média para definição */
+          inset 0 1px 0 rgba(255,255,255,0.03); /* brilho interno sutil */
         text-align: center;
         width: 100%;
-        max-width: 300px;
+        max-width: 320px;
         position: relative;
-        border: 1px solid rgba(255, 255, 255, 0.05);
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        transition: box-shadow 180ms ease, transform 180ms ease;
       }
       .icon-header {
         background: #0a669b;
@@ -62,20 +66,22 @@
         top: -60px;
         left: 50%;
         transform: translateX(-50%);
-        box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.3),
-          -5px -5px 15px rgba(255, 255, 255, 0.07);
+        box-shadow:
+          0 18px 40px rgba(1,12,30,0.45),
+          0 6px 18px rgba(0,0,0,0.28);
       }
       .icon-header svg {
         width: 60px;
         height: 60px;
-        fill: #0e66f3;
+        fill: #30c492;
       }
       h2 {
         margin-top: 70px;
         margin-bottom: 30px;
         font-size: 2em;
         font-weight: 600;
-        color: green;
+        color: rgb(20, 194, 43);
+        text-shadow: rgb(11, 13, 150) 5px 2px 2px;
       }
       form {
         display: flex;
@@ -100,12 +106,16 @@
         box-sizing: border-box;
         padding: 16px 20px 16px 50px;
         border: none;
-        border-radius: 15px;
-        background: rgba(33, 38, 73, 0.8);
-        color: #e0e5ec;
+        border-radius: 12px;
+        background: linear-gradient(50deg, #0886a5, #02708b);
+        color: #003805;
         font-size: 1em;
-        box-shadow: inset 5px 5px 10px rgba(0, 0, 0, 0.5),
-          inset -5px -5px 10px rgba(255, 255, 255, 0.05);
+        /* sombra interna + leve sombra externa para destacar */
+        box-shadow:
+          inset 6px 8px 18px rgba(0, 0, 0, 0.65),
+          inset -3px -3px 8px rgba(219, 9, 125, 0.03),
+          0 8px 18px rgba(2, 6, 23, 0.18);
+        transition: box-shadow 160ms ease, transform 120ms ease;
       }
       .options {
         display: flex;
@@ -117,32 +127,81 @@
       }
       .options a {
         color: #e0e5ec;
-        text-decoration: none;
+        text-decoration-line: underline;
 
         .options a:hover {
-         text-decoration: underline; 
+         text-shadow: #003805;
 }
 
       }
-      button[type="submit"] {
-        padding: 16px;
+      /* wrapper para permitir glow / neon atrás do botão */
+      .button-wrap {
+        position: relative;
+        display: inline-block;
+        width: 100%;
+        margin-top: 6px;
+        border-radius: 12px;
+        text-align: center;
+      }
+
+      .button-wrap button[type="submit"] {
+        position: relative;
+        z-index: 2;
+        display: inline-block;
+        width: 92%;
+        max-width: 260px;
+        padding: 14px 24px;
         border: none;
-        border-radius: 15px;
-        background: #03b2f7;
-        color: #e0e5ec;
-        font-size: 1.1em;
-        font-weight: bold;
+        border-radius: 12px;
+        background: linear-gradient(180deg,#1240be,#0f7f99);
+        color: #eafaf1;
+        font-size: 1.05em;
+        font-weight: 700;
         cursor: pointer;
-        transition: all 0.2s ease-in-out;
-        box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.3),
-          -5px -5px 10px rgba(255, 255, 255, 0.1);
+        box-shadow: 0 8px 22px rgba(1,12,30,0.28);
+        transition: transform 140ms ease, box-shadow 140ms ease;
+      }
+
+      /* pseudo-element do botão criando o neon atrás */
+      .button-wrap button[type="submit"]::before {
+        content: "";
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+        z-index: 1;
+        width: 140%;
+        height: 72%;
+        border-radius: 14px;
+        background: radial-gradient(circle at 50% 40%,
+                    rgba(16,185,129,0.36) 0%,
+                    rgba(16,185,129,0.22) 22%,
+                    rgba(16,185,129,0.08) 46%,
+                    transparent 58%);
+        filter: blur(18px);
+        pointer-events: none;
+        opacity: 1;
+        transition: opacity 160ms ease, transform 160ms ease, filter 160ms ease;
+      }
+
+      .button-wrap button[type="submit"]:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 10px 10px rgba(4, 235, 16, 0.36);
+      }
+
+      .button-wrap button[type="submit"]:hover::before {
+        transform: translate(-50%, -50%) scale(1.06);
+        filter: blur(40px);
+        opacity: 0;
+        border:#f5f2f5
       }
       .login-box p {
         margin-top: 25px;
         color: #e0e5ec;
+        
       }
       .login-box p a {
-        color: #03b2f7;
+        color: #09eb54;
         text-decoration: none;
         font-weight: bold;
       }
@@ -183,7 +242,9 @@
           <div class="options">
             <span /> <a href="#" id="forgot-password">Esqueceu a Senha?</a>
           </div>
-          <button type="submit">LOGIN</button>
+          <div class="button-wrap">
+            <button type="submit">LOGIN</button>
+          </div>
         </form>
         <p>Não tem uma conta? <a href="register.html">Cadastre-se</a></p>
         <div id="message"></div>

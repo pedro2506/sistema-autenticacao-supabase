@@ -45,9 +45,10 @@
             justify-content: center;
             align-items: center;
             color: #e0e5ec;
-            background: linear-gradient(-45deg, #034353, #0047AB, #0aa5ec, #0284c7);
-            background-size: 400% 400%;
-            animation: gradientMove 15s ease infinite;
+            /* paleta/efeito herdados do login (azuis/teal animado) */
+            background: linear-gradient(-45deg, #034353, #0047ab, #0aa5ec);
+                background-size: 300% 300%;
+                animation: gradientMove 6s ease infinite;
             padding: 20px;
             overflow-x: hidden;
         }
@@ -73,15 +74,16 @@
         .logo-circle {
             width: 120px;
             height: 120px;
-            background: linear-gradient(135deg, #0ea5e9 0%, #0284c7 100%);
+            /* usar o tom principal do login para o ícone flutuante */
+            background: linear-gradient(135deg, #0a669b 0%, #0f7f99 100%);
             border-radius: 50%;
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            box-shadow: 0 20px 60px rgba(14, 165, 233, 0.4),
-                        0 0 0 20px rgba(14, 165, 233, 0.1),
-                        inset 0 -10px 30px rgba(0, 0, 0, 0.2);
+            box-shadow: 0 26px 60px rgba(1,12,30,0.5),
+                        0 0 0 18px rgba(10,102,155,0.09),
+                        inset 0 -10px 30px rgba(0, 0, 0, 0.22);
             position: relative;
         }
         
@@ -92,11 +94,12 @@
             left: -3px;
             right: -3px;
             bottom: -3px;
-            background: linear-gradient(45deg, #0ea5e9, #06b6d4, #0284c7);
+            /* brilho sutil com a paleta login */
+            background: linear-gradient(45deg, #0a669b, #0aa5ec, #0047ab);
             border-radius: 50%;
             z-index: -1;
             opacity: 0.6;
-            filter: blur(10px);
+            filter: blur(12px);
         }
         
         .logo-circle svg {
@@ -128,24 +131,26 @@
 
         
         .content-box {
-            background: rgba(255, 255, 255, 0.05);
-            backdrop-filter: blur(20px);
+            /* tonalidade mais próxima do login: usar um azul-teal translúcido */
+            background: rgba(10,102,155,0.12);
+            backdrop-filter: blur(18px);
             border-radius: 30px;
             padding: 40px;
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3),
-                        inset 0 1px 0 rgba(255, 255, 255, 0.1);
-            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 30px 80px rgba(1,12,30,0.5),
+                        inset 0 1px 0 rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(10,102,155,0.12);
             animation: fadeInUp 0.8s ease 0.2s backwards;
         }
         
         .profile-card {
-            background: linear-gradient(135deg, rgba(14, 165, 233, 0.2) 0%, rgba(2, 132, 199, 0.2) 100%);
+            background: linear-gradient(135deg, rgba(2, 92, 104, 0.14) 50%, rgba(6, 131, 89, 0.06) 100%);
             border-radius: 20px;
             padding: 25px;
             margin-bottom: 30px;
-            border: 1px solid rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(10, 50, 231, 0.06);
             position: relative;
             overflow: hidden;
+            box-shadow: 0 28px 20px rgba(5, 228, 16, 0.35);
         }
         
         .profile-card::before {
@@ -155,8 +160,10 @@
             left: -100%;
             width: 100%;
             height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
+            background: linear-gradient(90deg, transparent, rgba(212, 8, 120, 0.06), transparent);
             animation: shimmer 3s infinite;
+            mix-blend-mode: overlay;
+            box-shadow: 0 14px 40px rgba(5, 238, 25, 0.35);
         }
         
         .info-grid {
@@ -166,17 +173,18 @@
         }
         
         .info-item {
-            background: rgba(0, 0, 0, 0.2);
+            background: rgba(3,18,34,0.18);
             padding: 15px;
             border-radius: 15px;
-            border: 1px solid rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.08);
             transition: all 0.3s ease;
+            box-shadow:  0 2px 8px rgba(255,255,255,0.02);
         }
         
         .info-item:hover {
-            background: rgba(0, 0, 0, 0.3);
+            background: rgba(3,18,34,0.26);
             transform: translateY(-5px);
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            box-shadow: 0 10px 30px rgba(1,8,20,0.45);
         }
         
         .info-label {
@@ -237,25 +245,26 @@
         }
         
         #editProfile {
-            background: linear-gradient(135deg, #0ea5e9 0%, #0284c7 100%);
+            /* usar gradiente/tons bem próximos ao login */
+            background: linear-gradient(135deg, #12a0be 0%, #0f7f99 100%);
             color: white;
-            box-shadow: 0 10px 30px rgba(14, 165, 233, 0.4);
+            box-shadow: 0 14px 40px rgba(10,102,155,0.35), 0 0 40px rgba(16,185,129,0.06);
         }
         
         #editProfile:hover {
             transform: translateY(-3px);
-            box-shadow: 0 15px 40px rgba(14, 165, 233, 0.5);
+            box-shadow: 0 20px 60px rgba(10,102,155,0.45), 0 0 80px rgba(16,185,129,0.12);
         }
         
         #logout {
             background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);
             color: white;
-            box-shadow: 0 10px 30px rgba(239, 68, 68, 0.4);
+            box-shadow: 0 10px 30px rgba(239, 68, 68, 0.32);
         }
         
         #logout:hover {
             transform: translateY(-3px);
-            box-shadow: 0 15px 40px rgba(239, 68, 68, 0.5);
+            box-shadow: 0 15px 40px rgba(239, 68, 68, 0.4);
         }
         
         @media (max-width: 768px) {
