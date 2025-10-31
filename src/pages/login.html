@@ -42,11 +42,10 @@
         background: #0a669b;
         padding: 20px;
         border-radius: 25px;
-        /* sombras em camadas para profundidade realista */
         box-shadow:
-          0 26px 50px rgba(1, 12, 30, 0.55),   /* sombra difusa principal por baixo */
-          0 8px 22px rgba(2, 8, 20, 0.32),     /* camada média para definição */
-          inset 0 1px 0 rgba(255,255,255,0.03); /* brilho interno sutil */
+          0 26px 50px rgba(1, 12, 30, 0.55),  
+          0 8px 22px rgba(2, 8, 20, 0.32),     
+          inset 0 1px 0 rgba(255,255,255,0.03);
         text-align: center;
         width: 100%;
         max-width: 320px;
@@ -55,8 +54,7 @@
         transition: box-shadow 180ms ease, transform 180ms ease;
       }
       .icon-header {
-        /* preencher o círculo com a logo (coloque em src/assets/codeforge-logo.png) */
-        background: #9b610a url('../assets/codeforge-logo.png') no-repeat center;
+        background: #14eca4 url('../assets/codeforge-logo.png') no-repeat center;
         background-size: 200%;
         background-blend-mode: multiply;
         width: 120px;
@@ -74,7 +72,6 @@
           0 6px 18px rgba(0,0,0,0.28);
           overflow: hidden;
       }
-      /* se existir uma tag img/svg dentro do círculo, escondemos para usar o background */
       .icon-header svg,
       .icon-header img {
         display: none !important;
@@ -120,7 +117,6 @@
         background: linear-gradient(50deg, #0886a5, #02708b);
         color: #003805;
         font-size: 1em;
-        /* sombra interna + leve sombra externa para destacar */
         box-shadow:
           inset 6px 8px 18px rgba(0, 0, 0, 0.65),
           inset -3px -3px 8px rgba(219, 9, 125, 0.03),
@@ -140,11 +136,10 @@
         text-decoration-line: underline;
 
         .options a:hover {
-         text-shadow: #003805;
+         text-shadow: #b1d8b5;
 }
 
       }
-      /* wrapper para permitir glow / neon atrás do botão */
       .button-wrap {
         position: relative;
         display: inline-block;
@@ -225,7 +220,6 @@
     <div class="container">
       <div class="login-box">
         <div class="icon-header">
-          <!-- substituído SVG por imagem fornecida; coloque o arquivo em src/assets/codeforge-logo.png -->
           <img src="../assets/codeforge-logo.png" alt="CodeForce" class="header-logo" />
         </div>
         <h2>CodeForce <br /></h2>
@@ -259,13 +253,14 @@
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="config.js"></script>
     <script>
       const supabaseUrl = "https://glzrteszukxmbjhkntdx.supabase.co";
       const supabaseKey =
         "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImdsenJ0ZXN6dWt4bWJqaGtudGR4Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjEzODg5OTIsImV4cCI6MjA3Njk2NDk5Mn0.cXmELzI3kc8adQ5hg20C5HJO350bbm4m1PN2-9sTt3E";
       const supabaseClient = supabase.createClient(supabaseUrl, supabaseKey);
 
-      const form = document.getElementById("login-form");
+      const form = document.getElementById('register-form');
       const message = document.getElementById("message");
 
       // --- INÍCIO DA NOVA FUNCIONALIDADE ---

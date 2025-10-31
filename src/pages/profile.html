@@ -5,147 +5,391 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Editar Perfil - CodeForce</title>
     <style>
-        /* O CSS permanece o mesmo, sem alterações */
         @keyframes gradientMove {
             0% { background-position: 0% 50%; }
             50% { background-position: 100% 50%; }
             100% { background-position: 0% 50%; }
         }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+        }
+        
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            margin: 0;
+            min-height: 100vh;
             display: flex;
             justify-content: center;
             align-items: center;
-            min-height: 100vh;
-            background: linear-gradient(-45deg, #034353, #0047AB, #0aa5ec);
+            color: #e0e5ec;
+            background: linear-gradient(-45deg, #034353, #0047ab, #0aa5ec);
             background-size: 300% 300%;
-            animation: gradientMove 5s ease infinite;
+            animation: gradientMove 6s ease infinite;
+            padding: 20px;
+            overflow-x: hidden;
         }
-        .container { display: flex; justify-content: center; align-items: center; width: 100%; padding: 20px; }
-        .content-box {
-            position: relative;
-            padding: 20px 40px 30px;
-            border-radius: 25px;
-            box-shadow: 10px 10px 20px rgba(0, 0, 0, 0.4), -10px -10px 20px rgba(255, 255, 255, 0.05);
-            width: 100%; max-width: 700px;
-            border: 1px solid rgba(255, 255, 255, 0.05);
-            background: #0a669b;
+        
+        .container {
+            width: 100%;
+            max-width: 700px;
+            animation: fadeInUp 0.8s ease;
         }
-        .icon-header {
-            /* preencher o círculo com a logo (coloque em src/assets/codeforge-logo.png) */
-            background: #0a669b url('../assets/codeforge-logo.png') no-repeat center/cover;
-            width: 100px; height: 100px;
+        
+        .header-section {
+            text-align: center;
+            margin-bottom: 40px;
+            animation: fadeInUp 0.6s ease;
+        }
+        
+        .logo-wrapper {
+            display: inline-block;
+            margin-bottom: 20px;
+            animation: float 3s ease-in-out infinite;
+        }
+        
+        .logo-circle {
+            width: 120px;
+            height: 120px;
+            background: #14eca4 url('../assets/codeforge-logo.png') no-repeat center;
+            background-size: 200%;
+            background-blend-mode: multiply;
             border-radius: 50%;
             display: flex;
-            justify-content: center;
+            flex-direction: column;
             align-items: center;
+            justify-content: center;
+            box-shadow: 0 26px 60px rgba(1,12,30,0.5),
+                        0 0 0 18px rgba(10,102,155,0.09),
+                        inset 0 -10px 30px rgba(0, 0, 0, 0.22);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .logo-circle::before {
+            content: '';
             position: absolute;
-            top: -50px; left: 50%;
-            transform: translateX(-50%);
-            box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.3), -5px -5px 15px rgba(255, 255, 255, 0.07);
+            top: -3px;
+            left: -3px;
+            right: -3px;
+            bottom: -3px;
+            background: linear-gradient(45deg, #0a669b, #0aa5ec, #0047ab);
+            border-radius: 50%;
+            z-index: -1;
+            opacity: 0.6;
+            filter: blur(12px);
         }
-        .icon-header svg,
-        .icon-header img,
-        .header-logo { display: none !important; }
-        @media (max-width: 480px) {
-            .header-logo { width: 90px; }
-            #avatarPreview { width: 120px !important; }
+        
+        .logo-circle svg,
+        .logo-circle img,
+        .logo-img {
+            display: none !important;
         }
+        
         h2 {
-            margin-top: 60px;
-            text-align: center; margin-bottom: 20px;
-            font-size: 1.8em; font-weight:600; color: #e0e5ec;
+            font-size: 2.2em;
+            font-weight: 700;
+            margin-bottom: 10px;
+            background: linear-gradient(135deg, #ffffff 0%, #bae6fd 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
         }
-        form { display: flex; flex-direction: column; gap: 20px; text-align: left; }
-        label { font-weight: bold; color: #a9b7d8; margin-bottom: -10px; }
-        input[type="text"], input[type="email"], input[type="password"] {
-            width: 100%; box-sizing: border-box; padding: 12px; border: none; border-radius: 15px;
-            background: rgba(33, 38, 73, 0.8); color: #e0e5ec; font-size: 1em;
-            box-shadow: inset 5px 5px 10px rgba(0,0,0,0.5), inset -5px -5px 10px rgba(255,255,255,0.05);
+        
+        .content-box {
+            background: rgba(217, 218, 203, 0.12);
+            backdrop-filter: blur(18px);
+            border-radius: 30px;
+            padding: 40px;
+            box-shadow: 0 30px 80px rgba(1,12,30,0.5),
+                        inset 0 1px 0 rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(10,102,155,0.12);
+            animation: fadeInUp 0.8s ease 0.2s backwards;
         }
-        input:focus { outline: none; box-shadow: inset 5px 5px 10px rgba(0,0,0,0.5), inset -5px -5px 10px rgba(255,255,255,0.05), 0 0 0 2px #d4d6e2; }
-        input[type="email"]:disabled { opacity: 0.6; cursor: not-allowed; }
+        
+        form {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+        
+        label {
+            color: #94a3b8;
+            font-size: 0.85em;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-weight: 600;
+            margin-bottom: -10px;
+        }
+        
+        input[type="text"],
+        input[type="email"],
+        input[type="password"] {
+            width: 100%;
+            padding: 15px;
+            border: none;
+            border-radius: 15px;
+            background: rgba(3,18,34,0.18);
+            color: #e0e5ec;
+            font-size: 1em;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 8px rgba(255,255,255,0.02);
+        }
+        
+        input:focus {
+            outline: none;
+            background: rgba(3,18,34,0.26);
+            box-shadow: 0 0 0 2px rgba(16,185,129,0.3), 0 10px 30px rgba(1,8,20,0.45);
+        }
+        
+        input[type="email"]:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
+        
+        .avatar-section {
+            text-align: center;
+            margin: 20px 0;
+            padding: 20px;
+            background: rgba(3,18,34,0.18);
+            border-radius: 15px;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+        
+        #avatarPreview {
+            width: 160px;
+            height: 160px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-bottom: 15px;
+            border: 4px solid rgba(16,185,129,0.3);
+            box-shadow: 0 10px 30px rgba(1,8,20,0.45);
+        }
+        
         .file-label {
-            display: inline-block; padding: 12px 20px; border-radius: 15px;
-            background: rgba(33, 38, 73, 0.8); color: #a9b7d8; cursor: pointer; text-align: center;
-            box-shadow: 5px 5px 10px rgba(0,0,0,0.3), -5px -5px 10px rgba(255,255,255,0.1);
+            display: inline-block;
+            padding: 12px 30px;
+            border-radius: 12px;
+            background: linear-gradient(135deg, #12a0be 0%, #0f7f99 100%);
+            color: white;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            box-shadow: 0 8px 20px rgba(10,102,155,0.35);
         }
-        .actions { margin-top: 30px; display: flex; flex-direction: column; gap: 15px; }
-        button, .btn-secondary {
-            padding: 12px 25px; border: none; border-radius: 15px; font-size: 1em;
-            font-weight: bold; cursor: pointer; transition: all 0.2s ease-in-out;
-            box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.3), -5px -5px 10px rgba(255, 255, 255, 0.1);
+        
+        .file-label:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 12px 30px rgba(10,102,155,0.45);
         }
-        button:hover, .btn-secondary:hover { transform: translateY(-2px); }
-        .btn-primary { background: #03b2f7; color: #e0e5ec; }
-        .btn-secondary { background: rgba(33, 38, 73, 0.8); color: #adb5bd; text-decoration: none; display: block; text-align: center; }
-        #message { margin-top: 20px; font-weight: bold; text-align: center;}
+        
+        .actions {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-top: 30px;
+        }
+        
+        button,
+        .btn-secondary {
+            padding: 15px 35px;
+            border: none;
+            border-radius: 15px;
+            font-size: 1em;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            text-decoration: none;
+            display: inline-block;
+        }
+        
+        button::before,
+        .btn-secondary::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.2);
+            transform: translate(-50%, -50%);
+            transition: width 0.6s, height 0.6s;
+        }
+        
+        button:hover::before,
+        .btn-secondary:hover::before {
+            width: 300px;
+            height: 300px;
+        }
+        
+        button span,
+        .btn-secondary span {
+            position: relative;
+            z-index: 1;
+        }
+        
+        .btn-primary {
+            background: linear-gradient(135deg, #12a0be 0%, #0f7f99 100%);
+            color: white;
+            box-shadow: 0 14px 40px rgba(10,102,155,0.35), 0 0 40px rgba(16,185,129,0.06);
+        }
+        
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 20px 60px rgba(10,102,155,0.45), 0 0 80px rgba(16,185,129,0.12);
+        }
+        
+        .btn-secondary {
+            background: rgba(3,18,34,0.18);
+            color: #e0e5ec;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            box-shadow: 0 10px 30px rgba(1,8,20,0.32);
+        }
+        
+        .btn-secondary:hover {
+            transform: translateY(-3px);
+            background: rgba(3,18,34,0.26);
+            box-shadow: 0 15px 40px rgba(1,8,20,0.45);
+        }
+        
+        #message {
+            margin-top: 20px;
+            font-weight: bold;
+            text-align: center;
+            padding: 15px;
+            border-radius: 12px;
+            animation: fadeInUp 0.5s ease;
+        }
+        
+        @media (max-width: 768px) {
+            h2 {
+                font-size: 1.8em;
+            }
+            
+            .content-box {
+                padding: 25px;
+            }
+            
+            .logo-circle {
+                width: 100px;
+                height: 100px;
+            }
+            
+            #avatarPreview {
+                width: 120px;
+                height: 120px;
+            }
+            
+            .actions {
+                flex-direction: column;
+            }
+            
+            button,
+            .btn-secondary {
+                width: 100%;
+            }
+        }
     </style>
 </head>
 <body>
     <div class="container">
-        <div class="content-box">
-            <div class="icon-header">
-                <!-- substituído SVG por imagem enviada; coloque em src/assets/codeforge-logo.png -->
-                <img src="../assets/codeforge-logo.png" alt="CodeForce" class="header-logo">
+        <div class="header-section">
+            <div class="logo-wrapper">
+                <div class="logo-circle">
+                    <img src="../assets/codeforge-logo.png" alt="CodeForce" class="logo-img">
+                </div>
             </div>
-            
             <h2>Editar Perfil</h2>
+        </div>
+        
+        <div class="content-box">
             <form id="profileForm">
                 <label for="name">Nome</label>
-                <input type="text" id="name" required>
+                <input type="text" id="name" placeholder="Seu nome completo" required>
                 
                 <label for="email">Email</label>
                 <input type="email" id="email" disabled>
-
-               
-               <label for="cpf">CPF</label>
+                
+                <label for="cpf">CPF</label>
                 <input type="text" id="cpf" placeholder="000.000.000-00">
                 
-               
                 <label for="address">Endereço</label>
                 <input type="text" id="address" placeholder="Sua rua, número, cidade...">
                 
-                
                 <label>Foto do Perfil</label>
-                <div style="text-align: center; margin-top: 10px;">
-                     <img id="avatarPreview" src="../assets/codeforge-logo.png" alt="Pré-visualização da Foto" style="width: 160px; height: auto; border-radius: 0; object-fit: contain; margin-bottom: 15px;">
+                <div class="avatar-section">
+                    <img id="avatarPreview" src="../assets/codeforge-logo.png" alt="Foto do Perfil">
+                    <br>
+                    <label for="avatar" class="file-label">
+                        <span>Escolher Nova Foto</span>
+                    </label>
+                    <input type="file" id="avatar" accept="image/*" style="display: none;">
                 </div>
-                <label for="avatar" class="file-label">Escolher Nova Foto</label>
-                <input type="file" id="avatar" accept="image/*" style="display: none;">
                 
                 <label for="password">Nova Senha</label>
                 <input type="password" id="password" placeholder="Deixe em branco para não alterar">
                 
                 <div class="actions">
-                    <button type="submit" class="btn-primary">Salvar Alterações</button>
-                    <a href="dashboard.html" class="btn-secondary">Voltar ao Dashboard</a>
+                    <button type="submit" class="btn-primary"><span>Salvar Alterações</span></button>
+                    <a href="dashboard.html" class="btn-secondary"><span>Voltar ao Dashboard</span></a>
                 </div>
             </form>
             <div id="message"></div>
         </div>
     </div>
+    
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="config.js"></script>
     <script>
         const supabaseUrl = 'https://glzrteszukxmbjhkntdx.supabase.co';
         const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImdsenJ0ZXN6dWt4bWJqaGtudGR4Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjEzODg5OTIsImV4cCI6MjA3Njk2NDk5Mn0.cXmELzI3kc8adQ5hg20C5HJO350bbm4m1PN2-9sTt3E';
         const supabaseClient = supabase.createClient(supabaseUrl, supabaseKey);
-
+        
+        const form = document.getElementById('register-form');
         const message = document.getElementById('message');
         let user;
 
         document.addEventListener('DOMContentLoaded', async () => {
             const { data: { session } } = await supabaseClient.auth.getSession();
-            if (!session) { window.location.href = 'login.html'; return; }
+            if (!session) { 
+                window.location.href = 'login.html'; 
+                return; 
+            }
             user = session.user;
 
-            const { data: profile } = await supabaseClient.from('user_profiles').select('*').eq('id', user.id).single();
+            const { data: profile } = await supabaseClient
+                .from('user_profiles')
+                .select('*')
+                .eq('id', user.id)
+                .single();
+
+                
             
             document.getElementById('email').value = user.email;
             if (profile) {
                 document.getElementById('name').value = profile.name || '';
-                // Popula os novos campos
                 document.getElementById('address').value = profile.address || '';
                 document.getElementById('cpf').value = profile.cpf || '';
                 
@@ -155,9 +399,21 @@
             }
         });
 
+        // Preview da imagem ao selecionar
+        document.getElementById('avatar').addEventListener('change', function(e) {
+            const file = e.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    document.getElementById('avatarPreview').src = e.target.result;
+                };
+                reader.readAsDataURL(file);
+            }
+        });
+
         document.getElementById('profileForm').addEventListener('submit', async (e) => {
             e.preventDefault();
-            // Pega os valores dos novos campos
+            
             const name = document.getElementById('name').value;
             const address = document.getElementById('address').value;
             const cpf = document.getElementById('cpf').value;
@@ -166,81 +422,90 @@
 
             try {
                 let avatar_url = document.getElementById('avatarPreview').src;
-                // Lógica da mensagem: começa com um valor padrão
                 let successMessage = 'Perfil atualizado com sucesso!';
 
                 if (file) {
                     const fileExt = file.name.split('.').pop();
                     const filePath = `${user.id}.${fileExt}`;
-                    await supabaseClient.storage.from('avatars').upload(filePath, file, { upsert: true });
-                    const { data: urlData } = supabaseClient.storage.from('avatars').getPublicUrl(filePath);
+                    await supabaseClient.storage
+                        .from('avatars')
+                        .upload(filePath, file, { upsert: true });
+                    
+                    const { data: urlData } = supabaseClient.storage
+                        .from('avatars')
+                        .getPublicUrl(filePath);
                     avatar_url = urlData.publicUrl;
                     
-                    // Se um arquivo foi enviado, muda a mensagem
                     successMessage = 'Nova foto do perfil foi adicionada!';
                 }
 
-                // Inclui os novos campos no upsert
-                await supabaseClient.from('user_profiles').upsert({ 
-                    id: user.id, 
-                    name, 
-                    address, 
-                    cpf, 
-                    avatar_url 
-                });
+                await supabaseClient
+                    .from('user_profiles')
+                    .upsert({ 
+                        id: user.id, 
+                        name, 
+                        address, 
+                        cpf, 
+                        avatar_url 
+                    });
 
-                if (password) await supabaseClient.auth.updateUser({ password });
+                if (password) {
+                    await supabaseClient.auth.updateUser({ password });
+                    successMessage += ' Senha atualizada!';
+                }
 
-                // Usa a variável da mensagem
                 message.textContent = successMessage;
                 message.style.color = '#81c784';
-                if (avatar_url) document.getElementById('avatarPreview').src = avatar_url;
+                message.style.background = 'rgba(129, 199, 132, 0.15)';
+                message.style.border = '1px solid rgba(129, 199, 132, 0.3)';
 
             } catch (err) {
                 message.textContent = 'Erro ao atualizar: ' + err.message;
                 message.style.color = '#ff6b6b';
+                message.style.background = 'rgba(255, 107, 107, 0.15)';
+                message.style.border = '1px solid rgba(255, 107, 107, 0.3)';
             }
         });
     </script>
-        <script>
-            (function(){
-                const tries = ['../assets/codeforge-logo.png','assets/codeforge-logo.png','/src/assets/codeforge-logo.png','/assets/codeforge-logo.png'];
-                function makeTextSVG(width){
-                    const ns = 'http://www.w3.org/2000/svg';
-                    const svg = document.createElementNS(ns,'svg');
-                    svg.setAttribute('viewBox','0 0 360 80');
-                    svg.setAttribute('width', width || 140);
-                    svg.setAttribute('height', 'auto');
-                    const text = document.createElementNS(ns,'text');
-                    text.setAttribute('x','50%');
-                    text.setAttribute('y','55%');
-                    text.setAttribute('dominant-baseline','middle');
-                    text.setAttribute('text-anchor','middle');
-                    text.setAttribute('font-family','Segoe UI, Tahoma, Arial, sans-serif');
-                    text.setAttribute('font-size','28');
-                    text.setAttribute('fill','#ffffff');
-                    text.textContent = 'CodeForce';
-                    svg.appendChild(text);
-                    return svg;
-                }
+    <script>
+        (function(){
+            const tries = ['../assets/codeforge-logo.png','assets/codeforge-logo.png','/src/assets/codeforge-logo.png','/assets/codeforge-logo.png'];
+            function makeTextSVG(width){
+                const ns = 'http://www.w3.org/2000/svg';
+                const svg = document.createElementNS(ns,'svg');
+                svg.setAttribute('viewBox','0 0 360 80');
+                svg.setAttribute('width', width || 140);
+                svg.setAttribute('height', 'auto');
+                const text = document.createElementNS(ns,'text');
+                text.setAttribute('x','50%');
+                text.setAttribute('y','55%');
+                text.setAttribute('dominant-baseline','middle');
+                text.setAttribute('text-anchor','middle');
+                text.setAttribute('font-family','Segoe UI, Tahoma, Arial, sans-serif');
+                text.setAttribute('font-size','28');
+                text.setAttribute('fill','#ffffff');
+                text.textContent = 'CodeForce';
+                svg.appendChild(text);
+                return svg;
+            }
 
-                function attachFallback(img){
-                    if(!img) return;
-                    let i = 0;
-                    img.addEventListener('error', function onerr(){
-                        if(i < tries.length){
-                            img.src = tries[i++];
-                        } else {
-                            const svg = makeTextSVG(parseInt(getComputedStyle(img).width) || 120);
-                            img.replaceWith(svg);
-                        }
-                    });
-                }
-
-                document.addEventListener('DOMContentLoaded', ()=>{
-                    document.querySelectorAll('.header-logo, #avatarPreview').forEach(attachFallback);
+            function attachFallback(img){
+                if(!img) return;
+                let i = 0;
+                img.addEventListener('error', function onerr(){
+                    if(i < tries.length){
+                        img.src = tries[i++];
+                    } else {
+                        const svg = makeTextSVG(parseInt(getComputedStyle(img).width) || 120);
+                        img.replaceWith(svg);
+                    }
                 });
-            })();
-        </script>
+            }
+
+            document.addEventListener('DOMContentLoaded', ()=>{
+                document.querySelectorAll('.logo-img, #avatarPreview').forEach(attachFallback);
+            });
+        })();
+    </script>
 </body>
 </html>

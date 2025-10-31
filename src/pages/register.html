@@ -10,82 +10,262 @@
             50% { background-position: 100% 50%; }
             100% { background-position: 0% 50%; }
         }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+        }
+        
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            margin: 0;
+            min-height: 100vh;
             display: flex;
             justify-content: center;
             align-items: center;
-            min-height: 100vh;
-            color: #d1d9e6;
-            background-color: #0f1a3d; /* Fundo escuro estático */
-        }
-        .container { display: flex; justify-content: center; align-items: center; width: 100%; padding: 20px; }
-        .content-box {
-            padding: 40px;
-            border-radius: 25px;
-            box-shadow: 10px 10px 20px rgba(0, 0, 0, 0.4), -10px -10px 20px rgba(255, 255, 255, 0.05);
-            text-align: center;
-            width: 100%;
-            max-width: 400px;
-            position: relative;
-            border: 1px solid rgba(255, 255, 255, 0.05);
-            /* Gradiente animado aplicado diretamente na caixa */
-            background: linear-gradient(-45deg, #034353, #0047AB, #0aa5ec);
+            color: #e0e5ec;
+            background: linear-gradient(-45deg, #034353, #0047ab, #0aa5ec);
             background-size: 300% 300%;
-            animation: gradientMove 5s ease infinite;
+            animation: gradientMove 6s ease infinite;
+            padding: 20px;
+            overflow-x: hidden;
         }
-        .icon-header {
-            /* preencher o círculo com a logo (coloque em src/assets/codeforge-logo.png) */
-            background: rgba(10, 102, 155, 0.8) url('../assets/codeforge-logo.png') no-repeat center/cover;
-            width: 120px; height: 120px; border-radius: 50%; display: flex;
-            justify-content: center; align-items: center; position: absolute;
-            top: -60px; left: 50%; transform: translateX(-50%);
-            box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.3), -5px -5px 15px rgba(255, 255, 255, 0.07);
+        
+        .container {
+            width: 100%;
+            max-width: 480px; /* Ajustado para um formulário de cadastro */
+            animation: fadeInUp 0.8s ease;
         }
-        .icon-header svg { display: none !important; }
-        h2 { margin-top: 70px; margin-bottom: 30px; font-size: 2.5em; font-weight: 600; color: #e0e5ec; }
-        form { display: flex; flex-direction: column; gap: 20px; }
-        input {
-            width: calc(100% - 40px); padding: 16px 20px; border: none; border-radius: 15px;
-            background: rgba(33, 38, 73, 0.8); color: #e0e5ec; font-size: 1em;
-            box-shadow: inset 5px 5px 10px rgba(0, 0, 0, 0.5), inset -5px -5px 10px rgba(255, 255, 255, 0.05);
+        
+        .header-section {
+            text-align: center;
+            margin-bottom: 40px;
+            animation: fadeInUp 0.6s ease;
+        }
+        
+        .logo-wrapper {
+            display: inline-block;
+            margin-bottom: 20px;
+            animation: float 3s ease-in-out infinite;
+        }
+        
+        .logo-circle {
+            width: 120px;
+            height: 120px;
+            background: #14eca4 url('../assets/codeforge-logo.png') no-repeat center;
+            background-size: 200%;
+            background-blend-mode: multiply;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 26px 60px rgba(1,12,30,0.5),
+                        0 0 0 18px rgba(10,102,155,0.09),
+                        inset 0 -10px 30px rgba(0, 0, 0, 0.22);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .logo-circle::before {
+            content: '';
+            position: absolute;
+            top: -3px; left: -3px; right: -3px; bottom: -3px;
+            background: linear-gradient(45deg, #0a669b, #0aa5ec, #0047ab);
+            border-radius: 50%;
+            z-index: -1;
+            opacity: 0.6;
+            filter: blur(12px);
+        }
+
+        .logo-circle img, .header-logo {
+            display: none !important;
+        }
+        
+        h2 {
+            font-size: 2.2em;
+            font-weight: 700;
+            background: linear-gradient(135deg, #ffffff 0%, #bae6fd 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .content-box {
+            background: rgba(10, 30, 50, 0.25);
+            backdrop-filter: blur(18px);
+            border-radius: 30px;
+            padding: 40px;
+            box-shadow: 0 30px 80px rgba(1,12,30,0.5),
+                        inset 0 1px 0 rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(10,102,155,0.12);
+            animation: fadeInUp 0.8s ease 0.2s backwards;
+        }
+        
+        form {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+        
+        .input-group {
+            position: relative;
+        }
+        
+        .input-group svg {
+            position: absolute;
+            left: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 20px;
+            height: 20px;
+            fill: #14eca4; /* Cor mais vibrante para o ícone */
+        }
+        
+        input[type="email"],
+        input[type="password"] {
+            width: 100%;
+            padding: 16px 20px 16px 50px;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 12px;
+            background: rgba(3,18,34,0.18);
+            color: #e0e5ec;
+            font-size: 1em;
             transition: all 0.3s ease;
         }
-        input::placeholder { color: #8a9ac0; }
-        input:focus { outline: none; box-shadow: inset 5px 5px 10px rgba(0, 0, 0, 0.5), inset -5px -5px 10px rgba(255, 255, 255, 0.05), 0 0 0 2px #d4d6e2; }
-        button {
-            padding: 16px; border: none; border-radius: 15px; background: #03b2f7; color: #e0e5ec;
-            font-size: 1.1em; font-weight: bold; cursor: pointer; transition: all 0.2s ease-in-out;
-            box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.3), -5px -5px 10px rgba(255, 255, 255, 0.1);
+        
+        input::placeholder {
+            color: rgba(224, 229, 236, 0.5);
         }
-        button:hover { background: #0dd2ec; }
-        button:active { background: #0394ce; box-shadow: inset 3px 3px 7px rgba(0,0,0,0.5), inset -3px -3px 7px rgba(255,255,255,0.05); }
-        p { margin-top: 25px; color: #e0e5ec; }
-        p a { color: #81c784; text-decoration: none; font-weight: bold; }
-        #message { margin-top: 15px; font-weight: bold; }
+        
+        input:focus {
+            outline: none;
+            background: rgba(3,18,34,0.26);
+            box-shadow: 0 0 0 2px rgba(16,185,129,0.3), 0 10px 30px rgba(1,8,20,0.45);
+        }
+        
+        .button-wrap {
+            text-align: center;
+            margin-top: 10px;
+        }
+        
+        button[type="submit"] {
+            padding: 15px 35px;
+            border: none;
+            border-radius: 15px;
+            font-size: 1em;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            background: linear-gradient(135deg, #12a0be 0%, #0f7f99 100%);
+            color: white;
+            box-shadow: 0 14px 40px rgba(10,102,155,0.35);
+        }
+
+        button[type="submit"]:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 20px 60px rgba(10,102,155,0.45);
+        }
+        
+        .content-box p {
+            margin-top: 25px;
+            color: #e0e5ec;
+            text-align: center;
+        }
+        
+        .content-box p a {
+            color: #14eca4;
+            text-decoration: none;
+            font-weight: bold;
+            transition: color 0.3s ease;
+        }
+        
+        .content-box p a:hover {
+            color: #ffffff;
+            text-decoration: underline;
+        }
+        
+        #message {
+            margin-top: 20px;
+            font-weight: bold;
+            text-align: center;
+            padding: 15px;
+            border-radius: 12px;
+            animation: fadeInUp 0.5s ease;
+        }
+
+        @media (max-width: 480px) {
+            h2 {
+                font-size: 1.8em;
+            }
+            .content-box {
+                padding: 25px;
+            }
+            .logo-circle {
+                width: 100px;
+                height: 100px;
+            }
+        }
     </style>
 </head>
 <body>
     <div class="container">
-        <div class="content-box">
-            <div class="icon-header">
-                <svg viewBox="0 0 24 24"><path d="M15 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm-9-2V7H4v3H1v2h3v3h2v-3h3v-2H6zm9 4c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></svg>
+        <div class="header-section">
+            <div class="logo-wrapper">
+                <div class="logo-circle">
+                    <img src="../assets/codeforge-logo.png" alt="CodeForce" class="header-logo" />
+                </div>
             </div>
             <h2>Crie sua Conta</h2>
+        </div>
+
+        <div class="content-box">
             <form id="register-form">
-                <input type="email" id="email" placeholder="Email" required />
-                <input type="password" id="password" placeholder="Senha" required />
-                <input type="password" id="confirm-password" placeholder="Confirme a Senha" required />
-                <button type="submit">Cadastrar</button>
+                <div class="input-group">
+                    <svg viewBox="0 0 24 24">
+                        <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z" />
+                    </svg>
+                    <input type="email" id="email" placeholder="Email" required />
+                </div>
+                <div class="input-group">
+                    <svg viewBox="0 0 24 24">
+                        <path d="M18 8h-1V6c0-2.76-2.24-5-5-5S7 3.24 7 6v2H6c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V10c0-1.1-.9-2-2-2zm-6 9c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2zm3.1-9H8.9V6c0-1.71 1.39-3.1 3.1-3.1 1.71 0 3.1 1.39 3.1 3.1v2z" />
+                    </svg>
+                    <input type="password" id="password" placeholder="Senha" required />
+                </div>
+                <div class="input-group">
+                    <svg viewBox="0 0 24 24">
+                        <path d="M18 8h-1V6c0-2.76-2.24-5-5-5S7 3.24 7 6v2H6c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V10c0-1.1-.9-2-2-2zm-6 9c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2zm3.1-9H8.9V6c0-1.71 1.39-3.1 3.1-3.1 1.71 0 3.1 1.39 3.1 3.1v2z" />
+                    </svg>
+                    <input type="password" id="confirm-password" placeholder="Confirme a Senha" required />
+                </div>
+                <div class="button-wrap">
+                    <button type="submit">CADASTRAR</button>
+                </div>
             </form>
             <p>Já tem uma conta? <a href="login.html">Faça Login</a></p>
             <div id="message"></div>
         </div>
     </div>
+    
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="config.js"></script>
     <script>
-        // SEU SCRIPT JAVASCRIPT DO SUPABASE VAI AQUI (sem alterações)
         const supabaseUrl = 'https://glzrteszukxmbjhkntdx.supabase.co';
         const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImdsenJ0ZXN6dWt4bWJqaGtudGR4Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjEzODg5OTIsImV4cCI6MjA3Njk2NDk5Mn0.cXmELzI3kc8adQ5hg20C5HJO350bbm4m1PN2-9sTt3E';
         const supabaseClient = supabase.createClient(supabaseUrl, supabaseKey);
@@ -95,6 +275,8 @@
 
         form.addEventListener('submit', async (e) => {
             e.preventDefault();
+            message.textContent = '';
+            
             const email = document.getElementById('email').value.trim();
             const password = document.getElementById('password').value;
             const confirmPassword = document.getElementById('confirm-password').value;
@@ -102,25 +284,78 @@
             if (password.length < 6) {
                 message.textContent = "A senha deve ter pelo menos 6 caracteres.";
                 message.style.color = "#ff6b6b";
+                message.style.background = "rgba(255, 107, 107, 0.15)";
                 return;
             }
+            
             if (password !== confirmPassword) {
                 message.textContent = "As senhas não coincidem!";
                 message.style.color = "#ff6b6b";
+                message.style.background = "rgba(255, 107, 107, 0.15)";
                 return;
             }
 
-            const { data, error } = await supabaseClient.auth.signUp({ email, password });
+            const { data, error } = await supabaseClient.auth.signUp({ 
+                email, 
+                password 
+            });
 
             if (error) {
                 message.textContent = error.message;
                 message.style.color = "#ff6b6b";
+                message.style.background = "rgba(255, 107, 107, 0.15)";
             } else {
                 message.textContent = "Conta criada! Verifique seu email para confirmar.";
                 message.style.color = "#81c784";
+                message.style.background = "rgba(129, 199, 132, 0.15)";
                 form.reset();
+                
+                // Redireciona para o login após 3 segundos
+                setTimeout(() => {
+                    window.location.href = 'login.html';
+                }, 3000);
             }
         });
+    </script>
+    <script>
+        (function(){
+            const tries = ['../assets/codeforge-logo.png','assets/codeforge-logo.png','/src/assets/codeforge-logo.png','/assets/codeforge-logo.png'];
+            function makeTextSVG(width){
+                const ns = 'http://www.w3.org/2000/svg';
+                const svg = document.createElementNS(ns,'svg');
+                svg.setAttribute('viewBox','0 0 360 80');
+                svg.setAttribute('width', width || 140);
+                svg.setAttribute('height', 'auto');
+                const text = document.createElementNS(ns,'text');
+                text.setAttribute('x','50%');
+                text.setAttribute('y','55%');
+                text.setAttribute('dominant-baseline','middle');
+                text.setAttribute('text-anchor','middle');
+                text.setAttribute('font-family','Segoe UI, Tahoma, Arial, sans-serif');
+                text.setAttribute('font-size','32');
+                text.setAttribute('fill','#0f7f99');
+                text.textContent = 'CodeForce';
+                svg.appendChild(text);
+                return svg;
+            }
+
+            function attachFallback(img){
+                if(!img) return;
+                let i = 0;
+                img.addEventListener('error', function onerr(){
+                    if(i < tries.length){
+                        img.src = tries[i++];
+                    } else {
+                        const svg = makeTextSVG(parseInt(getComputedStyle(img).width) || 140);
+                        img.replaceWith(svg);
+                    }
+                });
+            }
+
+            document.addEventListener('DOMContentLoaded', ()=>{
+                document.querySelectorAll('.header-logo').forEach(attachFallback);
+            });
+        })();
     </script>
 </body>
 </html>
